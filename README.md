@@ -1,6 +1,3 @@
-# hello-world-naveen
-Deploy simple hello world app on Docker Container.
-
 # Deploying Simple Python application on a Docker container
 This guide will go through how to deploy a simple Python Flask App on a docker container and how to validate it.
 
