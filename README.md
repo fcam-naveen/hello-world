@@ -18,7 +18,7 @@ This will build docker image ```hello-app``` and check docker image using ```doc
 ```docker run -d -p 8080:8080 --name simple_hello_app -it hello-app ```
 
 ## Verification
-http://localhost:8080 should return ```Hello!```  and 
+http://localhost:8080 should return ```Hello!```  and \
 http://localhost:8080/healthz should return
 ```
 {
