@@ -12,7 +12,7 @@ Docker can be installed using. https://docs.docker.com/engine/install/centos/
 
 ### Build Docker image
 ```docker build -t hello-app:latest . ```
-This will build docker image ```hello-app``` and check docker image using ```docker images```.
+This will build docker image ```hello-app``` and check docker image using ```docker images```
 
 ### Deploy your application
 ```docker run -d -p 8080:8080 --name simple_hello_app -it hello-app ```
