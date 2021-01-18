@@ -7,8 +7,8 @@ Docker can be installed using. https://docs.docker.com/engine/install/centos/
 
 ## Build and Deploy
 ### Clone the repository
-```git clone https://github.com/fcam-naveen/hello-world.git ```
-```cd hello-world ```
+```git clone https://github.com/fcam-naveen/hello-world.git 
+cd hello-world ```
 
 ### Build Docker image
 ```docker build -t hello-app:latest . ```
