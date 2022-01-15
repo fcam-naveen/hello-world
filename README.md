@@ -2,7 +2,7 @@
 This guide will go through how to deploy a simple Python Flask App on a docker container and how to validate it.
 
 ## Prerequists
-Please install docker engine. This example is using Centos7. Any other linux flavor should work.
+Please install docker engine. This example uses Centos7. Any other linux flavor should work.
 Docker can be installed using. https://docs.docker.com/engine/install/centos/
 
 ## Build and Deploy
