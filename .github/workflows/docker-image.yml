@@ -17,6 +17,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag hello-app:latest
     - name: start the container
-      run: docker run -d -p 8080:8080 --name simple_hello_app -it hello-app
+      run: docker run -d -p 8080:8080 --name simple_hello_app -it hello-app; docker ps -a 
     - name: test it
-      run: docker ps -a | grep hello_app; curl http://localhost:8080
+      run: netstat -na ; curl http://localhost:8080
