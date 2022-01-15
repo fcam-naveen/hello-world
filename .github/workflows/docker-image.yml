@@ -19,4 +19,4 @@ jobs:
     - name: start the container
       run: docker run -d -p 8080:8080 --name simple_hello_app -it hello-app
     - name: test it
-      run: curl http://localhost:8080
+      run: docker ps -a | grep hello_app; curl http://localhost:8080
