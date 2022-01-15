@@ -15,4 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag hello-app:latest
+    - name: start the container
+      run: docker run -d -p 8080:8080 --name simple_hello_app -it hello-app
+    - name: test it
+      run: curl http://localhost:8080
