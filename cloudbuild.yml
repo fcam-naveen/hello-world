@@ -1,41 +1,9 @@
 steps:
-  # Pull base image from Docker Hub
-  - name: 'docker'
-    id: 'pull-base-image'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        docker pull rockylinux/rockylinux:8.10  # Replace with your base image
-
-  # Build the Docker image
+  # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    id: 'build-image'
-    args: [
-      'build', 
-      '-t', 'gcr.io/$PROJECT_ID/my-app:${SHORT_SHA}', 
-      '-t', 'gcr.io/$PROJECT_ID/my-app:latest', 
-      '.'
-    ]
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello_world', '.']
 
-  # Push the image to Google Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    id: 'push-image'
-    args: [
-      'push', 
-      'gcr.io/$PROJECT_ID/my-app'
-    ]
 
-# Optional: Specify the base image to use
-images:
-  - 'gcr.io/$PROJECT_ID/my-app:${SHORT_SHA}'
-  - 'gcr.io/$PROJECT_ID/my-app:latest'
-
-# Optional: Timeout for the build process
-timeout: '1200s'  # 20 minutes
-
-# Optional: Specify service account if needed
-# serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/your-service-account@$PROJECT_ID.iam.gserviceaccount.com'
 options:
   logging: CLOUD_LOGGING_ONLY
 
