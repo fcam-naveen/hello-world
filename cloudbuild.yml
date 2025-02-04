@@ -1,29 +1,44 @@
 steps:
-  # Step 1: Authenticate with Docker Hub (optional but recommended to avoid rate limits)
-  - name: 'gcr.io/cloud-builders/docker'
+  # Pull base image from Docker Hub
+  - name: 'docker'
+    id: 'pull-base-image'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "$$DOCKER_PASSWORD" | docker login -u "$$DOCKER_USERNAME" --password-stdin
-    secretEnv: ['DOCKER_USERNAME', 'DOCKER_PASSWORD']
+        docker pull rockylinux/rockylinux:8.10  # Replace with your base image
 
-  # Step 2: Pull the base image from Docker Hub
+  # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['pull', 'rockylinux/rockylinux:8.10']
+    id: 'build-image'
+    args: [
+      'build', 
+      '-t', 'gcr.io/$PROJECT_ID/my-app:${SHORT_SHA}', 
+      '-t', 'gcr.io/$PROJECT_ID/my-app:latest', 
+      '.'
+    ]
 
-  # Step 3: Build a custom Docker image using your Dockerfile
+  # Push the image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'cloudbuild/hellow_rold:latest', '.']
+    id: 'push-image'
+    args: [
+      'push', 
+      'gcr.io/$PROJECT_ID/my-app'
+    ]
+
+# Optional: Specify the base image to use
+images:
+  - 'gcr.io/$PROJECT_ID/my-app:${SHORT_SHA}'
+  - 'gcr.io/$PROJECT_ID/my-app:latest'
+
+# Optional: Timeout for the build process
+timeout: '1200s'  # 20 minutes
+
+# Optional: Specify service account if needed
+# serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/your-service-account@$PROJECT_ID.iam.gserviceaccount.com'
 options:
   logging: CLOUD_LOGGING_ONLY
 
-availableSecrets:
-  secretManager:
-    - versionName: projects/604784161792/secrets/DOCKER_USER/versions/1
-      env: 'DOCKER_USERNAME'
-    - versionName: projects/604784161792/secrets/DOCKER_PASS/versions/1
-      env: 'DOCKER_PASSWORD'
 
       
 
