@@ -20,9 +20,10 @@ options:
 
 availableSecrets:
   secretManager:
-    - versionName: projects/604784161792/secrets/DOCKER_USER
+    - versionName: projects/604784161792/secrets/DOCKER_USER/versions/1
       env: 'DOCKER_USERNAME'
-    - versionName: projects/604784161792/secrets/DOCKER_PASS
+    - versionName: projects/604784161792/secrets/DOCKER_PASS/versions/1
       env: 'DOCKER_PASSWORD'
+
       
 
