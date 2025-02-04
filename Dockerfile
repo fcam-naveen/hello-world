@@ -1,6 +1,6 @@
 # Docker file python hello app
 
-FROM rockylinux/rocklinux:8.10
+FROM rockylinux:8
 
 RUN yum update -y && \
     yum install -y python3 && \
