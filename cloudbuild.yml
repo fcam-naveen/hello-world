@@ -1,5 +1,28 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-west2-docker.pkg.dev/myproject/hello_world', '.']
+  # Step 1: Authenticate with Docker Hub (optional but recommended to avoid rate limits)
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "$$DOCKER_PASSWORD" | docker login -u "$$DOCKER_USERNAME" --password-stdin
+    secretEnv: ['DOCKER_USERNAME', 'DOCKER_PASSWORD']
+
+  # Step 2: Pull the base image from Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', 'rockylinux/rockylinux:8.10']
+
+  # Step 3: Build a custom Docker image using your Dockerfile
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'cloudbuild/hellow_rold:latest', '.']
 options:
   logging: CLOUD_LOGGING_ONLY
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/604784161792/secrets/DOCKER_USER
+      env: 'DOCKER_USERNAME'
+    - versionName: projects/604784161792/secrets/DOCKER_PASS
+      env: 'DOCKER_PASSWORD'
+      
+
