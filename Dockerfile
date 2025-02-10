@@ -1,6 +1,6 @@
 # Docker file python hello app
 
-FROM centos:7
+FROM rockylinux:8
 
 RUN yum update -y && \
     yum install -y python3 && \
@@ -15,6 +15,6 @@ COPY ./requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
 
-COPY ./hello.py hello.py
+COPY ./*.py /app
 
 CMD [ "python3","hello.py" ]

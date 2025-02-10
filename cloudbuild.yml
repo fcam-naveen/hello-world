@@ -1,0 +1,12 @@
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello_world', '.']
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+
+      
+
